@@ -1,0 +1,15 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "proxy": "http://localhost:80/",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "dependencies": {
+    "next": "^12.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
