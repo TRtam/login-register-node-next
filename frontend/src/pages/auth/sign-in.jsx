@@ -1,3 +1,7 @@
+// import style(s)
+import styles from "../../../styles/modules/sign-in.module.css";
+
+// import module(s)
 import { useState } from "react";
 import Link from "next/link";
 
@@ -6,16 +10,21 @@ const signIn = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const trySignIn = async (data) => {
-        const response = await fetch(`http://localhost:80/auth/sign-in`, {
-            method: "POST",
-            mode: "cors",
-            body: data,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        return await response.json();
+        try {
+            const response = await fetch(`http://localhost:80/auth/sign-in`, {
+                method: "POST",
+                mode: "cors",
+                body: data,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+    
+            return await response.json();
+        }
+        catch(error) {
+            return false;
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -44,37 +53,41 @@ const signIn = () => {
     }
 
     return (
-        <div>
-            <div>
-                <h3>Sign Up</h3>
-            </div>
-            {errorMessage && (
-                <div>
-                    <p style={{color: "red"}}>{errorMessage}</p>
+        <div className={styles.wrapper}>
+            <div className={styles.container}>
+                <div className={styles.title}>
+                    <h3>Sign Up</h3>
                 </div>
-            )}
-            {infoMessage && (
-                <div>
-                    <p style={{color: "green"}}>{infoMessage}</p>
+                {errorMessage && (
+                    <div className={styles.message}>
+                        <p style={{color: "red"}}>{errorMessage}</p>
+                    </div>
+                )}
+                {infoMessage && (
+                    <div className={styles.message}>
+                        <p style={{color: "green"}}>{infoMessage}</p>
+                    </div>
+                )}
+                <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>Username</label>
+                        </div>
+                        <input name="username" type="text"/>
+                    </div>
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>Password</label>
+                        </div>
+                        <input name="password" type="password"/>
+                    </div>
+                    <button className={styles.form_item_submit} type="submit">Sign In</button>
+                </form>
+                <div className={styles.link}>
+                    <Link href="/auth/sign-up">
+                        <a>Don't have and account? Sign Up here</a>
+                    </Link>
                 </div>
-            )}
-            <form onSubmit={handleSubmit} autoComplete="off">
-                <div>
-                    <label>Username</label>
-                    <input name="username" type="text"/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input name="password" type="password"/>
-                </div>
-                <div>
-                    <button type="submit">Sign In</button>
-                </div>
-            </form>
-            <div>
-                <Link href="/auth/sign-up">
-                    <a>Don't have and account? Sign Up here</a>
-                </Link>
             </div>
         </div>
     )

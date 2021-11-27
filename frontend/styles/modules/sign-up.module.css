@@ -1,0 +1,77 @@
+.wrapper {
+    background-color: #333;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #444;
+    border-radius: 15px;
+    padding: 15px 15px;
+}
+
+.title {
+    padding-bottom: 15px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.message {
+    padding-bottom: 15px;
+}
+
+.form_item {
+    padding-bottom: 15px;
+}
+
+.form_item > div {
+    padding-bottom: 7.5px;
+    color: #ddd;
+}
+
+.form_item > input {
+    background-color: #333;
+    color: #eee;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.form_item_submit {
+    background-color: rgba(48, 110, 255, 0);;
+    color: rgba(48, 110, 255, 1);
+    padding: 10px 20px;
+    border-radius: 999px;
+    border: 1px solid rgba(48, 110, 255, 1);
+    transition: background-color 0.25s, color 0.25s;
+    margin-bottom: 15px;
+}
+
+.form_item_submit:hover {
+    cursor: pointer;
+    background-color: rgba(48, 110, 255, 0.15);
+}
+
+.form_item_submit:active {
+    background-color: rgba(48, 110, 255, 1);
+    color: #fff;
+}
+
+.link {
+    padding: 7.5px;
+}
+
+.link > a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+
+.link > a:hover {
+    color: rgba(255, 255, 255, 1);
+}

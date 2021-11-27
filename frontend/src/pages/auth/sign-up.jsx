@@ -1,3 +1,6 @@
+// import style(s)
+import styles from "../../../styles/modules/sign-up.module.css";
+
 // import module(s)
 import {useState} from "react";
 import Link from "next/link";
@@ -7,16 +10,21 @@ const signUp = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const trySignUp = async (data) => {
-        const response = await fetch(`http://localhost:80/auth/sign-up`, {
-            method: "POST",
-            mode: "cors",
-            body: data,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        return await response.json();
+        try {
+            const response = await fetch(`http://localhost:80/auth/sign-up`, {
+                method: "POST",
+                mode: "cors",
+                body: data,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            
+            return await response.json();
+        }
+        catch(error) {
+            return false;
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -47,49 +55,59 @@ const signUp = () => {
     }
 
     return (
-        <div>
-            <div>
-                <h3>Sign Up</h3>
-            </div>
-            {errorMessage && (
-                <div>
-                    <p style={{color: "red"}}>{errorMessage}</p>
+        <div className={styles.wrapper}>
+            <div className={styles.container}>
+                <div className={styles.title}>
+                    <p>Sign Up</p>
                 </div>
-            )}
-            {infoMessage && (
-                <div>
-                    <p style={{color: "green"}}>{infoMessage}</p>
+                {errorMessage && (
+                    <div className={styles.message}>
+                        <p style={{color: "red"}}>{errorMessage}</p>
+                    </div>
+                )}
+                {infoMessage && (
+                    <div className={styles.message}>
+                        <p style={{color: "green"}}>{infoMessage}</p>
+                    </div>
+                )}
+                <form onSubmit={handleSubmit} autoComplete="off" aria-autocomplete="none" className={styles.form}>
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>First Name</label>
+                        </div>
+                        <input name="first_name" type="text"/>
+                    </div>
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>Last Name</label>
+                        </div>
+                        <input name="last_name" type="text"/>
+                    </div>
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>Email</label>
+                        </div>
+                        <input name="email" type="email"/>
+                    </div>
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>Username</label>
+                        </div>
+                        <input name="username" type="text"/>
+                    </div>
+                    <div className={styles.form_item}>
+                        <div>
+                            <label>Password</label>
+                        </div>
+                        <input name="password" type="password"/>
+                    </div>
+                    <button className={styles.form_item_submit} type="submit">Sign Up</button>
+                </form>
+                <div className={styles.link}>
+                    <Link href="/auth/sign-in">
+                        <a>Already have an account? Sign In here</a>
+                    </Link>
                 </div>
-            )}
-            <form onSubmit={handleSubmit} autoComplete="off">
-                <div>
-                    <label>First Name</label>
-                    <input name="first_name" type="text"/>
-                </div>
-                <div>
-                    <label>Last Name</label>
-                    <input name="last_name" type="text"/>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input name="email" type="email"/>
-                </div>
-                <div>
-                    <label>Username</label>
-                    <input name="username" type="text"/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input name="password" type="password"/>
-                </div>
-                <div>
-                    <button type="submit">Sign Up</button>
-                </div>
-            </form>
-            <div>
-                <Link href="/auth/sign-in">
-                    <a>Already have an account? Sign In here</a>
-                </Link>
             </div>
         </div>
     )
